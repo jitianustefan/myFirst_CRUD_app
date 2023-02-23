@@ -1,0 +1,59 @@
+
+CREATE DATABASE `stiri` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `stiri`;
+
+
+CREATE TABLE `users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `nume` varchar(45) NOT NULL,
+  `prenume` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `parola` varchar(45) NOT NULL,
+  `dataadaugare` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `tip_utilizator` enum('ADMIN','UTILIZATOR') DEFAULT 'UTILIZATOR',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+
+INSERT INTO `stiri`.`users`
+(`id`,
+`nume`,
+`prenume`,
+`email`,
+`parola`,
+`tip_utilizator`)
+VALUES
+(1, 'Popescu', 'Ion', 'popescuion@admin.com','e120ea280aa50693d5568d0071456460', 'ADMIN');
+
+
+
+CREATE TABLE `stire` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `titlu` varchar(45) CHARACTER SET latin1 NOT NULL,
+  `poza` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `categorie` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `continut` varchar(8500) CHARACTER SET latin1 NOT NULL,
+  `ts` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE `comentariu` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `text` varchar(4500) NOT NULL,
+  `id_utilizator` int(10) NOT NULL,
+  `stirea` int(10) DEFAULT NULL,
+  `ts` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `categorie` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `nume` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
